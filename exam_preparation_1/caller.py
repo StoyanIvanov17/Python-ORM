@@ -48,7 +48,7 @@ def get_top_director():
 
 def get_top_actor():
     actor = Actor.objects.prefetch_related('movies').annotate(
-        num_movies=Count('movies'),
+        num_movies=Count('movies__starring_actor'),
         avg_movies_rating=Avg('movies__rating')
     ).order_by('-num_movies', 'full_name').first()
 
